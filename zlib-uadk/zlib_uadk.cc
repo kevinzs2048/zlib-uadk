@@ -234,9 +234,14 @@ out_free_ctx:
 // 创建压缩/解压所需session
 handle_t UadkCompSessInit(wd_comp_op_type type, int level)
 {
-    if (level >= LEVEL_NUM || level < 0) {
+    if (level >= LEVEL_NUM) {
         return 0;
     }
+
+    if (level < 0 ) {
+        level = 6;
+    }
+
     struct wd_comp_sess_setup setup;
     memset(&setup, 0, sizeof(struct wd_comp_sess_setup));
     struct sched_params param;
